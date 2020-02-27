@@ -15,18 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.oddlycoder.beatbox.databinding.FragmentBeatBoxBinding;
 import com.oddlycoder.beatbox.databinding.ListItemSoundBinding;
 
+import java.util.List;
+
 public class BeatBoxFragment extends Fragment {
 
-    private static BeatBoxFragment instance;
+    private static BeatBoxFragment sInstance;
+    private BeatBox mBeatBox;
 
     private BeatBoxFragment() {
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBeatBox = new BeatBox(getActivity());
+    }
+
     public static BeatBoxFragment getInstance(){
-        if (instance == null) {
-            instance = new BeatBoxFragment();
+        if (sInstance == null) {
+            sInstance = new BeatBoxFragment();
         }
-        return instance;
+        return sInstance;
     }
 
     @Nullable
@@ -37,7 +46,7 @@ public class BeatBoxFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.fragment_beat_box, container, false);
 
         binding.recyclerViewLayout.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        binding.recyclerViewLayout.setAdapter(new SoundAdapter());
+        binding.recyclerViewLayout.setAdapter(new SoundAdapter(mBeatBox.getSounds()));
         return binding.getRoot();
     }
 
@@ -50,6 +59,13 @@ public class BeatBoxFragment extends Fragment {
     }
 
     private class SoundAdapter extends RecyclerView.Adapter<SoundHolder> {
+
+        private List<Sound> mSounds;
+
+        public SoundAdapter(List<Sound> sounds) {
+            mSounds = sounds;
+        }
+
         @NonNull
         @Override
         public SoundHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,7 +82,7 @@ public class BeatBoxFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mSounds.size();
         }
     }
 }
