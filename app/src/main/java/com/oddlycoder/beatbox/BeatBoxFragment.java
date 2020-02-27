@@ -40,7 +40,7 @@ public class BeatBoxFragment extends Fragment {
         binding.recyclerViewLayout.setAdapter(new SoundAdapter());
         return binding.getRoot();
     }
-''
+
     private class SoundHolder extends RecyclerView.ViewHolder {
         private ListItemSoundBinding soundBinding;
         private SoundHolder(ListItemSoundBinding soundBinding) {
