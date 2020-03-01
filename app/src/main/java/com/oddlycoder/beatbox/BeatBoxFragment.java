@@ -55,6 +55,12 @@ public class BeatBoxFragment extends Fragment {
         private SoundHolder(ListItemSoundBinding soundBinding) {
             super(soundBinding.getRoot());
             this.soundBinding = soundBinding;
+            this.soundBinding.setViewModel(new SoundViewModel(mBeatBox));
+        }
+
+        public void bind(Sound sound) {
+            soundBinding.getViewModel().setSound(sound);
+            soundBinding.executePendingBindings();
         }
     }
 
@@ -77,7 +83,8 @@ public class BeatBoxFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull SoundHolder holder, int position) {
-            
+            Sound sound = mSounds.get(position);
+            holder.bind(sound);
         }
 
         @Override
