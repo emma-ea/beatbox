@@ -3,6 +3,7 @@ package com.oddlycoder.beatbox;
 public class Sound {
     private String mAssetPath;
     private String mName;
+    private Integer mSoundID;
 
     public Sound(String assetPath) {
         mAssetPath = assetPath;
@@ -17,5 +18,13 @@ public class Sound {
 
     public String getName() {
         return mName;
+    }
+
+    public Integer getSoundID() {
+        return mSoundID;
+    }
+
+    public void setSoundID(Integer soundID) {
+        mSoundID = soundID;
     }
 }
