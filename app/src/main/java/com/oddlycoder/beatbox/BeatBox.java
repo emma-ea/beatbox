@@ -35,7 +35,7 @@ public class BeatBox {
         sound.setSoundID(soundId);
     }
 
-    private void play(Sound sound) {
+    public void play(Sound sound) {
         Integer soundId = sound.getSoundID();
         if (soundId == null) {
             return;
